@@ -10,3 +10,13 @@ const ancientsCont = document.querySelector('.ancients-cont'),
     deckCont = document.querySelector('.deck-cont')
 
 //show ancients
+const showAncients = () => {
+    ancients.forEach((el,id)=>{
+        let div = document.createElement("div");
+        div.classList.add("ancient");
+        div.classList.add(el.name);
+        div.style.backgroundImage = `url(${el.cardFace})`
+        ancientsCont.appendChild(div);
+    })
+}
+showAncients();
