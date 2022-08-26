@@ -12,13 +12,15 @@ const ancientsCont = document.querySelector('.ancients-cont'),
     statusBar = document.querySelector('.status-bar'),
     stagesCont = document.querySelector('.stages-cont'),
     cardCount = document.querySelectorAll('.card-count'),
-    shuffleCont = document.querySelector('.shuffle-button-cont')
+    shuffleCont = document.querySelector('.shuffle-button-cont'),
+    shuffleButton = document.querySelector('.shuffle-button')
 
 let curAncient = '',
     curDiff = '',
     strStatus = '',
     curStage = '',
-    arrStagesCount = []
+    arrStagesCount = [],
+    cardDeck = []
 
 console.log(curAncient);
 //show ancients
@@ -91,5 +93,18 @@ const showStages = () => {
     console.log(arrStagesCount)
 }
 //shuffle LMFAO - Party Rock Anthem
+shuffleButton.addEventListener('click',() => {
+    if (curDiff.id == 'very easy') {
 
+    } else if (curDiff.id == 'easy') {
+        cardDeck = [...cards.blueCards,...cards.brownCards,...cards.greenCards].filter(el => el.difficulty != 'hard')  
+    } else if (curDiff.id == 'medium') {
+
+    } else if (curDiff.id == 'hard') {
+        cardDeck = [...cards.blueCards,...cards.brownCards,...cards.greenCards].filter(el => el.difficulty != 'easy') 
+    } else if (curDiff == 'very hard') {
+        
+    }
+    console.log(cardDeck);
+})
 showAncients();
