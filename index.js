@@ -9,13 +9,17 @@ const ancientsCont = document.querySelector('.ancients-cont'),
     diffCont = document.querySelector('.diff-cont'),
     deckCont = document.querySelector('.deck-cont'),
     msgBox = document.querySelector('.message-box'),
-    statusBar = document.querySelector('.status-bar')
+    statusBar = document.querySelector('.status-bar'),
+    stagesCont = document.querySelector('.stages-cont'),
+    cardCount = document.querySelectorAll('.card-count'),
+    shuffleCont = document.querySelector('.shuffle-button-cont')
 
 let curAncient = '',
     curDiff = '',
     strStatus = '',
-    curStage = ''
-    
+    curStage = '',
+    arrStagesCount = []
+
 console.log(curAncient);
 //show ancients
 const showAncients = () => {
@@ -33,24 +37,26 @@ const showAncients = () => {
             showDiff();
             showStatus();
             unvisAncient(id);
-        },{once:true})
+            setStagesArr();
+            showStages();
+        }, { once: true })
     })
 }
 
 //unvisible other ancients
 const unvisAncient = (id) => {
-   const ancientDiv = document.querySelectorAll('.ancient');
-   ancientDiv.forEach((el,id2) => {
-    if (id2 != id) el.classList.add('unvisible')
-    else el.classList.add('active');
-   })
+    const ancientDiv = document.querySelectorAll('.ancient');
+    ancientDiv.forEach((el, id2) => {
+        if (id2 != id) el.classList.add('unvisible')
+        else el.classList.add('active');
+    })
 }
 
 const showMessage = (txt) => {
     msgBox.innerHTML = txt
 }
 const showStatus = () => {
-    statusBar.innerHTML = curAncient.name +' ['+curDiff.name+'] ' + curStage;
+    statusBar.innerHTML = curAncient.name + ' [' + curDiff.name + '] ' + curStage;
 }
 
 //show difficult chooser
@@ -62,14 +68,28 @@ const showDiff = () => {
         li.classList.add("diff-item");
         li.innerHTML = el.name;
         ul.appendChild(li);
-        li.addEventListener('click',(el)=>{
+        li.addEventListener('click', (el) => {
             curDiff = difficulties[id];
             ul.classList.add('unvisible');
             showMessage('Shuffle the cards');
+            shuffleCont.classList.remove('unvisible');
             showStatus();
         })
     })
     diffCont.appendChild(ul);
 }
+//set stages
+const setStagesArr = () => {
+    arrStagesCount = [...Object.values(curAncient.firstStage), ...Object.values(curAncient.secondStage), ...Object.values(curAncient.thirdStage)];
+}
+//show stages
+const showStages = () => {
+    cardCount.forEach((el, id) => {
+        el.innerHTML = arrStagesCount[id];
+    });
+    stagesCont.classList.remove('unvisible');
+    console.log(arrStagesCount)
+}
+//shuffle LMFAO - Party Rock Anthem
 
 showAncients();
