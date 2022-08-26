@@ -1,7 +1,16 @@
 body {
     background: url('/assets/home.png') no-repeat;
+    color:red;
+    font-size: xx-large;
 }
 
+li {
+    cursor: pointer;
+    opacity: 0.5;
+}
+li:hover {
+    opacity: 1;
+}
 .ancients-cont {
     display: flex;
     justify-content: space-around;
@@ -17,13 +26,37 @@ body {
     width: 440px;
     height: 570px;
 }
+
+.ancient.active {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+}
+.unvisible {
+    display:none;
+}
+
+.diff-list {
+    position: absolute;
+    bottom: 200px;
+    width: 100%;
+    text-align: center;
+    
+}
+.diff-item {
+    list-style-type: none;
+}
+
 footer {
     position: absolute;
-    bottom: 50px;
+    bottom: 10px;
     width: 100%;
 }
 .message-box {
-    color: red;
-    font-size: xx-large;
     text-align: center;
+}
+.status-bar {
+    text-align: right;
+    margin-right: 50px;
+    font-size: large;
 }

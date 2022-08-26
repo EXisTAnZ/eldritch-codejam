@@ -8,9 +8,14 @@ console.log(difficulties);
 const ancientsCont = document.querySelector('.ancients-cont'),
     diffCont = document.querySelector('.diff-cont'),
     deckCont = document.querySelector('.deck-cont'),
-    msgBox = document.querySelector('.message-box')
+    msgBox = document.querySelector('.message-box'),
+    statusBar = document.querySelector('.status-bar')
 
-let curAncient = ancients[0];
+let curAncient = '',
+    curDiff = '',
+    strStatus = '',
+    curStage = ''
+    
 console.log(curAncient);
 //show ancients
 const showAncients = () => {
@@ -20,18 +25,32 @@ const showAncients = () => {
         div.classList.add(el.name);
         div.style.backgroundImage = `url(${el.cardFace})`
         ancientsCont.appendChild(div);
-        div.addEventListener('click', () => {
+        div.addEventListener('click', (elem) => {
             curAncient = ancients[id];
             console.log(curAncient);
+            //div.style.transform = `translate(${id*(-370)}px,0px)`;
             showMessage('Choose your rank!');
             showDiff();
-        })
+            showStatus();
+            unvisAncient(id);
+        },{once:true})
     })
 }
 
+//unvisible other ancients
+const unvisAncient = (id) => {
+   const ancientDiv = document.querySelectorAll('.ancient');
+   ancientDiv.forEach((el,id2) => {
+    if (id2 != id) el.classList.add('unvisible')
+    else el.classList.add('active');
+   })
+}
 
 const showMessage = (txt) => {
     msgBox.innerHTML = txt
+}
+const showStatus = () => {
+    statusBar.innerHTML = curAncient.name +' ['+curDiff.name+'] ' + curStage;
 }
 
 //show difficult chooser
@@ -43,6 +62,12 @@ const showDiff = () => {
         li.classList.add("diff-item");
         li.innerHTML = el.name;
         ul.appendChild(li);
+        li.addEventListener('click',(el)=>{
+            curDiff = difficulties[id];
+            ul.classList.add('unvisible');
+            showMessage('Shuffle the cards');
+            showStatus();
+        })
     })
     diffCont.appendChild(ul);
 }
