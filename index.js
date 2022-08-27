@@ -2,7 +2,7 @@ import ancients from './data/ancients.js';
 import cards from './data/mythicCards/index.js';
 import difficulties from './data/difficulties.js';
 //console.log(ancients);
-console.log(cards);
+//console.log(cards);
 //console.log(difficulties);
 
 const ancientsCont = document.querySelector('.ancients-cont'),
@@ -143,7 +143,10 @@ const setDecksByStages = () => {
 cardDeckDom.addEventListener('click', () => {
     currentCard.classList.remove('unvisible');
     if (cardDeck.length>1) showMessage('Take another one card')
-    else showMessage('Finish the game');
+    else {
+        showMessage('Finish the game');
+        cardDeckDom.style.backgroundImage = 'url(./assets/mythicCardBackgroundEmpty.png)'
+    }
     const nextCard = getNextCard();
     currentCard.style.backgroundImage = `url(${nextCard.cardFace})`
 
