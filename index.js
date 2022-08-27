@@ -124,15 +124,15 @@ const setDecksByStages = () => {
     blueDeck = filterDeckByDiffs(cards.blueCards);
     
 
-    let firstStageDeck = [...greenDeck.slice(0, curAncient.firstStage.greenCards),
-                         ...brownDeck.slice(0, curAncient.firstStage.brownCards),
-                         ...blueDeck.slice(0, curAncient.firstStage.blueCards)],
-        secondStageDeck = [...greenDeck.slice(0, curAncient.secondStage.greenCards),
-                            ...brownDeck.slice(0, curAncient.secondStage.brownCards),
-                            ...blueDeck.slice(0, curAncient.secondStage.blueCards)],
-        thirdStageDeck = [...greenDeck.slice(0, curAncient.thirdStage.greenCards),
-                            ...brownDeck.slice(0, curAncient.thirdStage.brownCards),
-                            ...blueDeck.slice(0, curAncient.thirdStage.blueCards)];               
+    let firstStageDeck = [...greenDeck.splice(0, curAncient.firstStage.greenCards),
+                         ...brownDeck.splice(0, curAncient.firstStage.brownCards),
+                         ...blueDeck.splice(0, curAncient.firstStage.blueCards)],
+        secondStageDeck = [...greenDeck.splice(0, curAncient.secondStage.greenCards),
+                            ...brownDeck.splice(0, curAncient.secondStage.brownCards),
+                            ...blueDeck.splice(0, curAncient.secondStage.blueCards)],
+        thirdStageDeck = [...greenDeck.splice(0, curAncient.thirdStage.greenCards),
+                            ...brownDeck.splice(0, curAncient.thirdStage.brownCards),
+                            ...blueDeck.splice(0, curAncient.thirdStage.blueCards)];               
 
     return ([...firstStageDeck.sort(()=> Math.random()-.5),
         ...secondStageDeck.sort(()=> Math.random()-.5),
@@ -142,9 +142,11 @@ const setDecksByStages = () => {
 //begin the game
 cardDeckDom.addEventListener('click', () => {
     currentCard.classList.remove('unvisible');
+    if (cardDeck.length>1) showMessage('Take another one card')
+    else showMessage('Finish the game');
     const nextCard = getNextCard();
-    //cards.blueCards[0].cardFace
     currentCard.style.backgroundImage = `url(${nextCard.cardFace})`
+
 })
 
 //get the card
@@ -172,6 +174,7 @@ const getNextCard = () => {
         showStages();
         return curCard;
     } else {
+        showMessage('You WIN!!!');
         cardDeckDom.classList.add('unvisible');
         currentCard.classList.add('unvisible');
         return false;
