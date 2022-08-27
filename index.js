@@ -94,16 +94,14 @@ const showStages = () => {
 }
 //shuffle LMFAO - Party Rock Anthem
 shuffleButton.addEventListener('click',() => {
-    console.log(filterDeck(cards.brownCards));
-    let blueDeck = [],
-    brownDeck = [],
-    greenDeck = [];
+
+    setDecksByStages();
 })
 
-const filterDeck = (deck) => {
+const filterDeckByDiffs = (deck) => {
     switch (curDiff.id) {
     case 'easiest':
-        return [...deck.filter(el => el.difficulty == 'easy').sort(() => Math.random()-.5),...deck.filter(el => el.difficulty == 'normal').sort(() => Math.random()-.5)].reverse();
+        return [...deck.filter(el => el.difficulty == 'easy').sort(() => Math.random()-.5),...deck.filter(el => el.difficulty == 'normal').sort(() => Math.random()-.5)];
     case 'easy':
         return deck.filter(el => el.difficulty != 'hard').sort(() => Math.random()-.5);
     case 'normal':
@@ -111,7 +109,20 @@ const filterDeck = (deck) => {
     case 'hard':
         return deck.filter(el => el.difficulty != 'easy').sort(() => Math.random()-.5);
     case 'hardest':
-        return [...deck.filter(el => el.difficulty == 'hard').sort(() => Math.random()-.5),...deck.filter(el => el.difficulty == 'normal').sort(() => Math.random()-.5)].reverse();
+        return [...deck.filter(el => el.difficulty == 'hard').sort(() => Math.random()-.5),...deck.filter(el => el.difficulty == 'normal').sort(() => Math.random()-.5)];
     }
+}
+
+const setDecksByStages = () => {
+    let blueDeck = filterDeckByDiffs(cards.blueCards),
+    brownDeck = filterDeckByDiffs(cards.brownCards),
+    greenDeck = filterDeckByDiffs(cards.greenCards),
+    firstStageDeck = []
+
+    console.log(blueDeck);
+    console.log(blueDeck.slice(0,0));
+
+
+
 }
 showAncients();
