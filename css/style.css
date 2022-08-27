@@ -100,6 +100,27 @@ footer {
     margin-right: 50px;
     font-size: large;
 }
+.card-deck {
+    width: 180px;
+    height: 265px;
+    background: url('/assets/mythicCardBackground.png') no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 25%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.current-card {
+    width: 180px;
+    height: 265px;
+    background: url('/assets/mythicCardBackground.png') no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 70%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
 .unvisible {
     display: none;

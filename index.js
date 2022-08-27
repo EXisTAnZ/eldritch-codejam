@@ -13,7 +13,8 @@ const ancientsCont = document.querySelector('.ancients-cont'),
     stagesCont = document.querySelector('.stages-cont'),
     cardCount = document.querySelectorAll('.card-count'),
     shuffleCont = document.querySelector('.shuffle-button-cont'),
-    shuffleButton = document.querySelector('.shuffle-button')
+    shuffleButton = document.querySelector('.shuffle-button'),
+    cardDeckDom = document.querySelector('.card-deck')
 
 let curAncient = '',
     curDiff = '',
@@ -76,7 +77,7 @@ const showDiff = () => {
             showMessage('Shuffle the cards');
             shuffleCont.classList.remove('unvisible');
             showStatus();
-        })
+        }, { once: true })
     })
     diffCont.appendChild(ul);
 }
@@ -90,13 +91,16 @@ const showStages = () => {
         el.innerHTML = arrStagesCount[id];
     });
     stagesCont.classList.remove('unvisible');
-    console.log(arrStagesCount)
 }
 //shuffle LMFAO - Party Rock Anthem
 shuffleButton.addEventListener('click',() => {
+    cardDeck = setDecksByStages();
+    console.log(cardDeck);
+    shuffleCont.classList.add('unvisible');
+    showMessage('Let the journey begin!');
+    cardDeckDom.classList.remove('unvisible');
 
-    setDecksByStages();
-})
+}, { once: true })
 
 const filterDeckByDiffs = (deck) => {
     switch (curDiff.id) {
@@ -114,7 +118,7 @@ const filterDeckByDiffs = (deck) => {
 }
 
 const setDecksByStages = () => {
-    let greenDeck = filterDeckByDiffs(cards.greenCards),
+    const greenDeck = filterDeckByDiffs(cards.greenCards),
     brownDeck = filterDeckByDiffs(cards.brownCards),
     blueDeck = filterDeckByDiffs(cards.blueCards);
     
@@ -129,8 +133,9 @@ const setDecksByStages = () => {
                             ...brownDeck.slice(0, curAncient.thirdStage.brownCards),
                             ...blueDeck.slice(0, curAncient.thirdStage.blueCards)];               
 
-    console.log(1,firstStageDeck,2,secondStageDeck,3,thirdStageDeck);
-    //console.log(blueDeck.slice(0,0));
+    return ([...firstStageDeck.sort(()=> Math.random()-.5),
+        ...secondStageDeck.sort(()=> Math.random()-.5),
+        ...thirdStageDeck.sort(()=> Math.random()-.5)]).reverse();
 
 
 
