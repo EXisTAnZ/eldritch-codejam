@@ -1,9 +1,9 @@
 import ancients from './data/ancients.js';
 import cards from './data/mythicCards/index.js';
 import difficulties from './data/difficulties.js';
-console.log(ancients);
+//console.log(ancients);
 console.log(cards);
-console.log(difficulties);
+//console.log(difficulties);
 
 const ancientsCont = document.querySelector('.ancients-cont'),
     diffCont = document.querySelector('.diff-cont'),
@@ -94,17 +94,24 @@ const showStages = () => {
 }
 //shuffle LMFAO - Party Rock Anthem
 shuffleButton.addEventListener('click',() => {
-    if (curDiff.id == 'very easy') {
-
-    } else if (curDiff.id == 'easy') {
-        cardDeck = [...cards.blueCards,...cards.brownCards,...cards.greenCards].filter(el => el.difficulty != 'hard')  
-    } else if (curDiff.id == 'medium') {
-
-    } else if (curDiff.id == 'hard') {
-        cardDeck = [...cards.blueCards,...cards.brownCards,...cards.greenCards].filter(el => el.difficulty != 'easy') 
-    } else if (curDiff == 'very hard') {
-        
-    }
-    console.log(cardDeck);
+    console.log(filterDeck(cards.brownCards));
+    let blueDeck = [],
+    brownDeck = [],
+    greenDeck = [];
 })
+
+const filterDeck = (deck) => {
+    switch (curDiff.id) {
+    case 'easiest':
+        return [...deck.filter(el => el.difficulty == 'easy').sort(() => Math.random()-.5),...deck.filter(el => el.difficulty == 'normal').sort(() => Math.random()-.5)].reverse();
+    case 'easy':
+        return deck.filter(el => el.difficulty != 'hard').sort(() => Math.random()-.5);
+    case 'normal':
+        return deck.sort(() => Math.random()-.5);
+    case 'hard':
+        return deck.filter(el => el.difficulty != 'easy').sort(() => Math.random()-.5);
+    case 'hardest':
+        return [...deck.filter(el => el.difficulty == 'hard').sort(() => Math.random()-.5),...deck.filter(el => el.difficulty == 'normal').sort(() => Math.random()-.5)].reverse();
+    }
+}
 showAncients();
