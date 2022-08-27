@@ -14,7 +14,8 @@ const ancientsCont = document.querySelector('.ancients-cont'),
     cardCount = document.querySelectorAll('.card-count'),
     shuffleCont = document.querySelector('.shuffle-button-cont'),
     shuffleButton = document.querySelector('.shuffle-button'),
-    cardDeckDom = document.querySelector('.card-deck')
+    cardDeckDom = document.querySelector('.card-deck'),
+    currentCard = document.querySelector('.current-card')
 
 let curAncient = '',
     curDiff = '',
@@ -136,8 +137,44 @@ const setDecksByStages = () => {
     return ([...firstStageDeck.sort(()=> Math.random()-.5),
         ...secondStageDeck.sort(()=> Math.random()-.5),
         ...thirdStageDeck.sort(()=> Math.random()-.5)]).reverse();
+}
 
+//begin the game
+cardDeckDom.addEventListener('click', () => {
+    currentCard.classList.remove('unvisible');
+    const nextCard = getNextCard();
+    //cards.blueCards[0].cardFace
+    currentCard.style.backgroundImage = `url(${nextCard.cardFace})`
+})
 
-
+//get the card
+const getNextCard = () => {
+    const curCard = cardDeck.pop();
+    console.log(curCard);
+    if(curCard) {
+        switch (curCard.color) {
+            case 'green':
+                if (arrStagesCount[0] > 0) arrStagesCount[0]--
+                else if (arrStagesCount[3]>0) arrStagesCount[3]--
+                else arrStagesCount[6]--;
+                break;
+            case 'brown':
+                if (arrStagesCount[1] > 0) arrStagesCount[1]--
+                else if (arrStagesCount[4]>0) arrStagesCount[4]--
+                else arrStagesCount[7]--;
+                break;
+            case 'blue':
+                if (arrStagesCount[2] > 0) arrStagesCount[2]--
+                else if (arrStagesCount[5]>0) arrStagesCount[5]--
+                else arrStagesCount[8]--;
+                break;
+        }
+        showStages();
+        return curCard;
+    } else {
+        cardDeckDom.classList.add('unvisible');
+        currentCard.classList.add('unvisible');
+        return false;
+    }
 }
 showAncients();
