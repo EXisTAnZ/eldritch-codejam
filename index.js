@@ -178,6 +178,7 @@ const getNextCard = () => {
         return curCard;
     } else {
         showMessage('You WIN!!!');
+        statusBar.innerHTML = '(refresh the page if you want to play one more time)'
         cardDeckDom.classList.add('unvisible');
         currentCard.classList.add('unvisible');
         return false;
