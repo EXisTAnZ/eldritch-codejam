@@ -103,7 +103,7 @@ footer {
 .card-deck {
     width: 180px;
     height: 265px;
-    background: url('/assets/mythicCardBackground.png') no-repeat;
+    background: url('./assets/mythicCardBackground.png') no-repeat;
     background-size: cover;
     position: absolute;
     top: 25%; 
@@ -114,7 +114,7 @@ footer {
 .current-card {
     width: 180px;
     height: 265px;
-    background: url('/assets/mythicCardBackground.png') no-repeat;
+    background: url('./assets/mythicCardBackground.png') no-repeat;
     background-size: cover;
     position: absolute;
     top: 70%; 
