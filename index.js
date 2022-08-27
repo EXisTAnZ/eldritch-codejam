@@ -24,7 +24,7 @@ let curAncient = '',
     arrStagesCount = [],
     cardDeck = []
 
-console.log(curAncient);
+
 //show ancients
 const showAncients = () => {
     ancients.forEach((el, id) => {
@@ -35,8 +35,6 @@ const showAncients = () => {
         ancientsCont.appendChild(div);
         div.addEventListener('click', (elem) => {
             curAncient = ancients[id];
-            console.log(curAncient);
-            //div.style.transform = `translate(${id*(-370)}px,0px)`;
             showMessage('Choose your rank!');
             showDiff();
             showStatus();
@@ -96,7 +94,6 @@ const showStages = () => {
 //shuffle LMFAO - Party Rock Anthem
 shuffleButton.addEventListener('click',() => {
     cardDeck = setDecksByStages();
-    console.log(cardDeck);
     shuffleCont.classList.add('unvisible');
     showMessage('Let the journey begin!');
     cardDeckDom.classList.remove('unvisible');

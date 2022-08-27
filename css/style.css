@@ -81,9 +81,14 @@ brown-cards {
     text-align: center;
 }
 .shuffle-button {
+    cursor: pointer;
     background-color: brown;
     color: white;
     width: 200px;
+    transition: 0.5s;
+}
+.shuffle-button:hover {
+    transform: scale(1.1);
 }
 footer {
     position: absolute;
@@ -101,6 +106,7 @@ footer {
     font-size: large;
 }
 .card-deck {
+    cursor: pointer;
     width: 180px;
     height: 265px;
     background: url('../assets/mythicCardBackground.png') no-repeat;
@@ -109,6 +115,11 @@ footer {
     top: 25%; 
     left: 50%;
     transform: translate(-50%, -50%);
+    transition: 0.3s;
+}
+.card-deck:hover {
+    width: 190px;
+    height: 280px;
 }
 
 .current-card {
