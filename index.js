@@ -114,13 +114,23 @@ const filterDeckByDiffs = (deck) => {
 }
 
 const setDecksByStages = () => {
-    let blueDeck = filterDeckByDiffs(cards.blueCards),
+    let greenDeck = filterDeckByDiffs(cards.greenCards),
     brownDeck = filterDeckByDiffs(cards.brownCards),
-    greenDeck = filterDeckByDiffs(cards.greenCards),
-    firstStageDeck = []
+    blueDeck = filterDeckByDiffs(cards.blueCards);
+    
 
-    console.log(blueDeck);
-    console.log(blueDeck.slice(0,0));
+    let firstStageDeck = [...greenDeck.slice(0, curAncient.firstStage.greenCards),
+                         ...brownDeck.slice(0, curAncient.firstStage.brownCards),
+                         ...blueDeck.slice(0, curAncient.firstStage.blueCards)],
+        secondStageDeck = [...greenDeck.slice(0, curAncient.secondStage.greenCards),
+                            ...brownDeck.slice(0, curAncient.secondStage.brownCards),
+                            ...blueDeck.slice(0, curAncient.secondStage.blueCards)],
+        thirdStageDeck = [...greenDeck.slice(0, curAncient.thirdStage.greenCards),
+                            ...brownDeck.slice(0, curAncient.thirdStage.brownCards),
+                            ...blueDeck.slice(0, curAncient.thirdStage.blueCards)];               
+
+    console.log(1,firstStageDeck,2,secondStageDeck,3,thirdStageDeck);
+    //console.log(blueDeck.slice(0,0));
 
 
 
