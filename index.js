@@ -152,8 +152,8 @@ cardDeckDom.addEventListener('click', () => {
 //get the card
 const getNextCard = () => {
     const curCard = cardDeck.pop();
-    console.log(curCard);
     if(curCard) {
+        console.log(curCard.id,curCard.difficulty);
         switch (curCard.color) {
             case 'green':
                 if (arrStagesCount[0] > 0) arrStagesCount[0]--
