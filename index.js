@@ -1,9 +1,6 @@
 import ancients from './data/ancients.js';
 import cards from './data/mythicCards/index.js';
 import difficulties from './data/difficulties.js';
-//console.log(ancients);
-//console.log(cards);
-//console.log(difficulties);
 
 const ancientsCont = document.querySelector('.ancients-cont'),
     diffCont = document.querySelector('.diff-cont'),
@@ -14,6 +11,8 @@ const ancientsCont = document.querySelector('.ancients-cont'),
     cardCount = document.querySelectorAll('.card-count'),
     shuffleCont = document.querySelector('.shuffle-button-cont'),
     shuffleButton = document.querySelector('.shuffle-button'),
+    newgameCont = document.querySelector('.newgame-button-cont'),
+    newgameButton = document.querySelector('.newgame-button'),
     cardDeckDom = document.querySelector('.card-deck'),
     currentCard = document.querySelector('.current-card')
 
@@ -23,7 +22,6 @@ let curAncient = '',
     curStage = '',
     arrStagesCount = [],
     cardDeck = []
-
 
 //show ancients
 const showAncients = () => {
@@ -80,10 +78,12 @@ const showDiff = () => {
     })
     diffCont.appendChild(ul);
 }
+
 //set stages
 const setStagesArr = () => {
     arrStagesCount = [...Object.values(curAncient.firstStage), ...Object.values(curAncient.secondStage), ...Object.values(curAncient.thirdStage)];
 }
+
 //show stages
 const showStages = () => {
     cardCount.forEach((el, id) => {
@@ -91,13 +91,13 @@ const showStages = () => {
     });
     stagesCont.classList.remove('unvisible');
 }
+
 //shuffle LMFAO - Party Rock Anthem
 shuffleButton.addEventListener('click',() => {
     cardDeck = setDecksByStages();
     shuffleCont.classList.add('unvisible');
     showMessage('Let the journey begin!');
     cardDeckDom.classList.remove('unvisible');
-
 }, { once: true })
 
 const filterDeckByDiffs = (deck) => {
@@ -115,12 +115,12 @@ const filterDeckByDiffs = (deck) => {
     }
 }
 
+//sort deck by stages
 const setDecksByStages = () => {
     const greenDeck = filterDeckByDiffs(cards.greenCards),
     brownDeck = filterDeckByDiffs(cards.brownCards),
     blueDeck = filterDeckByDiffs(cards.blueCards);
     
-
     let firstStageDeck = [...greenDeck.splice(0, curAncient.firstStage.greenCards),
                          ...brownDeck.splice(0, curAncient.firstStage.brownCards),
                          ...blueDeck.splice(0, curAncient.firstStage.blueCards)],
@@ -175,10 +175,12 @@ const getNextCard = () => {
         return curCard;
     } else {
         showMessage('You WIN!!!');
-        statusBar.innerHTML = '(refresh the page if you want to play one more time)'
+        statusBar.innerHTML = '(refresh the page if you want to play one more time)';
+        newgameCont.classList.remove('unvisible');
         cardDeckDom.classList.add('unvisible');
         currentCard.classList.add('unvisible');
         return false;
     }
 }
+newgameButton.addEventListener('click', ()=> {window.location.reload();});
 showAncients();
